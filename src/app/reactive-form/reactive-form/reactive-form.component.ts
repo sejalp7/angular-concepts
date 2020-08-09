@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -11,7 +11,7 @@ export class ReactiveFormComponent implements OnInit {
   constructor(private fB: FormBuilder) { }
 
   registrationForm = this.fB.group( {
-    userName: ['Sejal'],
+    userName: ['', [Validators.required, Validators.minLength(3)]],
     password: [''],
     confirmPassword: [''],
     address: this.fB.group({
