@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { forbiddenNameValidator } from '../../customValidator/forbiddenNameValidator';
 import { PasswordValidator } from '../../customValidator/password.validator';
 
@@ -10,20 +10,32 @@ import { PasswordValidator } from '../../customValidator/password.validator';
 })
 export class ReactiveFormComponent implements OnInit {
 
+  registrationForm: FormGroup;
   constructor(private fB: FormBuilder) { }
 
-  registrationForm = this.fB.group( {
-    userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/password/)]],
-    password: [''],
-    confirmPassword: [''],
-    address: this.fB.group({
-      city: [''],
-      state: [''],
-      postalCode: ['']
-    })
-  }, { validator: PasswordValidator });
-
   ngOnInit(): void {
+    this.registrationForm = this.fB.group( {
+      userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/password/)]],
+      email: [''],
+      subscribe: [false],
+      password: [''],
+      confirmPassword: [''],
+      address: this.fB.group({
+        city: [''],
+        state: [''],
+        postalCode: ['']
+      })
+    }, { validator: PasswordValidator });
+
+    this.registrationForm.get('subscribe').valueChanges.subscribe(checkValue => {
+      const email = this.registrationForm.get('email');
+      if(checkValue) {
+        email.setValidators(Validators.required);
+      } else {
+        email.clearValidators();
+      }
+      email.updateValueAndValidity();
+    })
   }
 
   onLoadData(): void {
