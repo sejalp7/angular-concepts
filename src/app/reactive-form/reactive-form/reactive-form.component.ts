@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { forbiddenNameValidator } from '../../customValidator/forbiddenNameValidator';
+import { PasswordValidator } from '../../customValidator/password.validator';
 
 @Component({
   selector: 'app-reactive-form',
@@ -20,7 +21,7 @@ export class ReactiveFormComponent implements OnInit {
       state: [''],
       postalCode: ['']
     })
-  });
+  }, { validator: PasswordValidator });
 
   ngOnInit(): void {
   }
