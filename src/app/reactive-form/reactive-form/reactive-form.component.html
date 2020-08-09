@@ -17,6 +17,8 @@
           class="text-danger">Username is required</small>
           <small *ngIf="registrationForm.get('userName').errors?.minlength"
           class="text-danger">Username must be atleast 3 characters</small>
+          <small *ngIf="registrationForm.get('userName').errors?.forbiddenName"
+          class="text-danger">Username not allowed</small>
       </div>
      
     </div>
