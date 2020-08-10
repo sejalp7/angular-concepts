@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { CustomDirectiveDirective } from './directives/custom-directive.directive';
 import { HostListenBindDirective } from './directives/host-listen-bind.directive';
 import { ReactiveFormComponent } from './reactive-form/reactive-form/reactive-form.component';
+import { CustomPipe } from './customPipe/custom.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomDirectiveDirective,
     HostListenBindDirective,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,
